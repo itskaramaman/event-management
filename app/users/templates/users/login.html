@@ -1,0 +1,18 @@
+{% extends 'event/base.html' %} {% load tailwind_filters %} {% block content %}
+<main class="p-10">
+  <section>
+    <h1 class="text-3xl mb-5">Login</h1>
+    <form class="border rounded-lg p-5" method="POST">
+      {% csrf_token %} {{form|crispy}}
+      <hr />
+      <div class="error">{{ form.errors }}</div>
+      <button
+        class="text-white py-1 px-2 rounded-md bg-blue-400 hover:bg-blue-500"
+        type="submit"
+      >
+        Login
+      </button>
+    </form>
+  </section>
+</main>
+{% endblock %}

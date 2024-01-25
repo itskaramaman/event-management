@@ -1,0 +1,17 @@
+{% extends 'event/base.html' %} {% load crispy_forms_tags %} {% block content %}
+<main class="p-10">
+  <section>
+    <h1 class="text-3xl mb-5">Create Event</h1>
+    <form class="border rounded-lg p-5" method="POST">
+      {% csrf_token %} {% crispy form %}
+      <hr />
+      <button
+        class="text-white py-1 px-2 rounded-md bg-blue-400 hover:bg-blue-500"
+        type="submit"
+      >
+        Create
+      </button>
+    </form>
+  </section>
+</main>
+{% endblock %}
