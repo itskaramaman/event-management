@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login as login_auth
+from django.contrib.auth import login as login_auth, logout as logout_auth
 
 
 def sign_up(request):
@@ -22,13 +22,21 @@ def login(request):
     Login user
     """
     if request.method == 'POST':
-        import ipdb; ipdb.set_trace()
-        form = AuthenticationForm(request.POST)
+        form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             login_auth(request, form.get_user())
             return redirect('/')
         else:
             print(form.errors)
+    form = AuthenticationForm()
+    return render(request, 'users/login.html', {'form': form})
+
+
+def logout(request):
+    """
+    Logout a user
+    """
+    logout_auth(request)
     form = AuthenticationForm()
     return render(request, 'users/login.html', {'form': form})
 

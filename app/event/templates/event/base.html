@@ -45,14 +45,14 @@
           </p>
           <a
             class="text-white py-1 px-2 rounded-md bg-blue-400 hover:bg-blue-500"
-            href="#"
+            href="{% url 'logout' %}"
             >Log Out</a
           >
         </div>
         {% else %}
         <a
           class="bg-white py-1 px-2 rounded-md text-blue-400 hover:bg-blue-400 hover:text-white"
-          href="#"
+          href="{% url 'login' %}"
           >Login</a
         >
         <a
