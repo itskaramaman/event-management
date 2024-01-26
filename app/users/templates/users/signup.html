@@ -4,7 +4,12 @@
     <h1 class="text-3xl mb-5">Sign Up</h1>
     <form class="border rounded-lg p-5" method="POST">
       {% csrf_token %} {{form|crispy}}
-      <hr />
+      <hr class="my-3" />
+      {% for error in form_errors %}
+      <div class="bg-red-100 p-1 mb-2 rounded-md">
+        <small class="text-xs text-red-500"> {{error}} </small>
+      </div>
+      {% endfor %}
       <button
         class="text-white py-1 px-2 rounded-md bg-blue-400 hover:bg-blue-500"
         type="submit"

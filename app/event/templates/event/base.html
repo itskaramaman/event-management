@@ -63,6 +63,23 @@
         {% endif %}
       </div>
     </nav>
-    {% block content %} {% endblock %}
+    {% if messages %}
+    <section class="flex justify-around mt-5">
+      {% for message in messages %} {% if message.tags == 'success' %}
+      <small class="w-4/12 p-3 rounded-md text-center bg-green-100"
+        >{{message}}
+      </small>
+      {% elif message.tags == 'error' %}
+      <small class="w-4/12 p-3 rounded-md text-center bg-red-200"
+        >{{message}}
+      </small>
+      {% else %}
+      <small class="w-4/12 p-3 rounded-md text-center bg-blue-200"
+        >{{message}}</small
+      >
+      {% endif %} {% endfor %}
+    </section>
+    {% endif %}
+    <main>{% block content %} {% endblock %}</main>
   </body>
 </html>

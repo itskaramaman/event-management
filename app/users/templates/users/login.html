@@ -1,17 +1,23 @@
 {% extends 'event/base.html' %} {% load tailwind_filters %} {% block content %}
-<main class="p-10">
-  <section>
+<main class="p-10 flex justify-around">
+  <section class="w-4/12">
     <h1 class="text-3xl mb-5">Login</h1>
     <form class="border rounded-lg p-5" method="POST">
       {% csrf_token %} {{form|crispy}}
-      <hr />
-      <div class="error">{{ form.errors }}</div>
-      <button
-        class="text-white py-1 px-2 rounded-md bg-blue-400 hover:bg-blue-500"
-        type="submit"
-      >
-        Login
-      </button>
+      <hr class="my-5" />
+      {% for error in form_errors %}
+      <div class="bg-red-100 p-1 mb-2 rounded-md">
+        <small class="text-xs text-red-500"> {{error}} </small>
+      </div>
+      {% endfor %}
+      <div class="flex justify-end">
+        <button
+          class="text-white py-1 px-2 rounded-md bg-blue-400 hover:bg-blue-500"
+          type="submit"
+        >
+          Login
+        </button>
+      </div>
     </form>
   </section>
 </main>
