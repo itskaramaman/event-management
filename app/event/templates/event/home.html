@@ -2,55 +2,19 @@
 <main class="p-10">
   <h1 class="text-3xl">Up coming events</h1>
   <hr class="my-5" />
+  <!-- Online events -->
   <h2 class="text-2xl mb-5">Online Events</h2>
   <ul class="flex gap-5 w-full">
     {% for event in online_events %}
-    <li class="border rounded-lg w-3/12 shadow-md">
-      <img
-        class="rounded-lg h-40 w-full cover"
-        src="{{ event.image.url }}"
-        alt="event-image"
-      />
-      <section class="p-2">
-        <h3 class="text-lg line-clamp-2">{{event.title}}</h3>
-        <small class="text-gray-500 font-semibold"
-          >Organizer: {{event.organizer}}</small
-        >
-        <div class="flex justify-between mt-2">
-          <div class="flex gap-1">
-            <img
-              class="h-5"
-              src="{% static 'event/images/calendar-outline.svg' %}"
-              alt="checkmark"
-            />
-            <small class="text-gray-500 font-semibold"
-              >{{event.starts_at|date:"M j, D, g:iA"}}</small
-            >
-          </div>
-          <small class="text-gray-500 font-semibold"
-            >{{event.ends_at|date:"M j, D, g:iA"}}</small
-          >
-        </div>
-        <section class="flex justify-between mt-2">
-          <div class="flex gap-1">
-            <img
-              class="h-5"
-              src="{% static 'event/images/checkmark-circle-outline.svg' %}"
-              alt="checkmark"
-            />
-            <small class="text-gray-500 font-semibold">5 going</small>
-          </div>
-          <div class="flex gap-1">
-            <img
-              class="h-5"
-              src="{% static 'event/images/ticket-outline.svg' %}"
-              alt="checkmark"
-            />
-            <small>{{event.price}}</small>
-          </div>
-        </section>
-      </section>
-    </li>
+      {% include 'event/event_card.html' with event=event %}
+    {% endfor %}
+  </ul>
+
+  <!-- Offline events -->
+  <h2 class="text-2xl my-5">Nearby Events</h2>
+  <ul class="flex gap-5 w-full">
+    {% for event in offline_events %}
+      {% include 'event/event_card.html' with event=event %}
     {% endfor %}
   </ul>
 </main>

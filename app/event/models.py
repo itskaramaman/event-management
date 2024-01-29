@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.text import slugify
 
 
 class Event(models.Model):
@@ -10,6 +11,7 @@ class Event(models.Model):
     ]
     title = models.CharField(max_length=255, blank=False, null=False)
     description = models.TextField(blank=True, null=True)
+    slug = models.SlugField(unique=True, blank=True, null=True, max_length=255)
     starts_at = models.DateTimeField(blank=False, null=False)
     ends_at = models.DateTimeField(blank=False, null=False)
     online = models.BooleanField(default=False)
@@ -29,6 +31,12 @@ class Event(models.Model):
     def __str__(self):
         return self.title
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+
+        super().save(*args, **kwargs)
+
 
 class Category(models.Model):
     title = models.CharField(max_length=255, unique=True)
@@ -42,3 +50,14 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class EventAttendants(models.Model):
+    """
+    Relationship between Event and Attendee
+    """
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    attendees = models.ManyToManyField(User)
+
+    def __str__(self):
+        return f'{self.title}'

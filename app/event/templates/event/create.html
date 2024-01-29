@@ -2,7 +2,11 @@
 <main class="p-10">
   <section>
     <h1 class="text-3xl mb-5">Create Event</h1>
-    <form class="border rounded-lg p-5" method="POST">
+    <form
+      class="border rounded-lg p-5"
+      method="POST"
+      enctype="multipart/form-data"
+    >
       {% csrf_token %} {% crispy form %}
       <hr />
       <button
